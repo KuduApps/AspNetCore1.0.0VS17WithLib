@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +34,12 @@ namespace DotNetCore100
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            var str1 = CoreClassLibrary.Class1.returnStr();
+            var str2 = StandardClassLib.Class1.returnStr();
+            if (str1 != str2)
+            {
+                throw new InvalidOperationException("failed to load lib");
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
